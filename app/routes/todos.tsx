@@ -86,6 +86,7 @@ export default function Todos() {
         <section className="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
           <h2 className="mb-4 text-lg font-semibold text-gray-900">Add a todo</h2>
           <TodoForm
+          key={todos.length}
             errors={
               actionData && "errors" in actionData ? actionData.errors : undefined
             }
