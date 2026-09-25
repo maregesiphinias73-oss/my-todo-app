@@ -44,7 +44,7 @@ export function TodoCard({ todo, errors }: TodoCardProps) {
             <button
               type="button"
               onClick={() => setIsEditModalOpen(true)}
-              className="rounded-lg border bg-blue-600 border-gray-300 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700"
+              className="rounded-lg border bg-blue-600 border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50"
             >
               Edit
             </button>
