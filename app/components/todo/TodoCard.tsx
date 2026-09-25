@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Form } from "react-router";
 import { TodoEditModal } from "../modal/TodoEditModal";
+import { DeleteModal } from "../modal/DeleteModal";
 
 type Todo = {
   id: string;
@@ -19,6 +20,8 @@ type TodoCardProps = {
 
 export function TodoCard({ todo, errors }: TodoCardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const deleteFormRef = useRef<HTMLFormElement>(null);
 
   return (
     <>
@@ -41,7 +44,7 @@ export function TodoCard({ todo, errors }: TodoCardProps) {
             <button
               type="button"
               onClick={() => setIsEditModalOpen(true)}
-              className="rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50"
+              className="rounded-lg border bg-blue-600 border-gray-300 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700"
             >
               Edit
             </button>
@@ -62,11 +65,12 @@ export function TodoCard({ todo, errors }: TodoCardProps) {
               </button>
             </Form>
 
-            <Form method="post">
+            <Form method="post" ref={deleteFormRef}>
               <input type="hidden" name="intent" value="delete" />
               <input type="hidden" name="id" value={todo.id} />
               <button
-                type="submit"
+                type="button"
+                onClick={() => setIsDeleteModalOpen(true)}
                 className="rounded-lg bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700"
               >
                 Delete
@@ -81,6 +85,15 @@ export function TodoCard({ todo, errors }: TodoCardProps) {
           todo={todo}
           errors={errors}
           onClose={() => setIsEditModalOpen(false)}
+        />
+      )}
+
+      {isDeleteModalOpen && (
+        <DeleteModal
+          title="Delete todo"
+          message={`Are you sure you want to delete "${todo.title}"? This cannot be undone.`}
+          onConfirm={() => deleteFormRef.current?.requestSubmit()}
+          onCancel={() => setIsDeleteModalOpen(false)}
         />
       )}
     </>

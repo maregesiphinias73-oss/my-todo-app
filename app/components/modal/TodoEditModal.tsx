@@ -46,7 +46,7 @@ export function TodoEditModal({ todo, errors, onClose }: TodoEditModalProps) {
         <button
           type="button"
           onClick={onClose}
-          className="mt-3 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+          className="mt-3 w-full rounded-lg border  bg-red-500 border-gray-300 px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-red-700"
         >
           Cancel
         </button>
